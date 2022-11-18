@@ -1,12 +1,3 @@
-# Use this website: https://www.lendingtree.com/reviews/business
-# Write a web service that accepts requests of 'business' URLs (i.e. https://www.lendingtree.com/reviews/business/ondeck/51886298)
-# This service should collect all 'reviews' on the URL defined
-# The response should consist of: title of the review, the content of review, author, star rating, date of review, and any other info you think would be relevant
-# Write tests for your API
-# No need to make a view and datastore is optional
-# Error/bad request handling should be built out
-
-
 from bs4 import BeautifulSoup
 import requests
 from fastapi import HTTPException, status
@@ -38,7 +29,6 @@ class BusinessReviewsService():
             raise HTTPException(status_code=status.HTTP_204_NO_CONTENT,
                                 detail=f"The business '{business}' with business id {business_id} has no existing reviews. Please check that the business name and business id are correct.")
 
-        #last element of main_reviews_arr contains an empty array
         reviews_dict = {
             'business_name': business,
             'business_id': business_id,
@@ -104,7 +94,7 @@ class BusinessReviewsService():
                 'year': date_posted[1]
             }
 
-            # IMPORTANT: Maybe we could add if the review was flagged or not? We can add the "recommended" field as well
+            # Ideas: Maybe we could add if the review was flagged or not? We can add the "recommended" field as well
 
             main_reviews_in_curr_page_arr.append(
                 {
